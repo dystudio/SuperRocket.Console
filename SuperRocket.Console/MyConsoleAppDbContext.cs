@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using Abp.EntityFramework;
 
-namespace AbpEfConsoleApp
+namespace SuperRocket.Console
 {
     //EF DbContext class.
     public class MyConsoleAppDbContext : AbpDbContext

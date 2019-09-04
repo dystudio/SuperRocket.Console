@@ -1,6 +1,6 @@
 using System;
 
-namespace AbpEfConsoleApp.Migrations
+namespace SuperRocket.Console.Migrations
 {
     using System.Data.Entity.Migrations;
 

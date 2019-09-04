@@ -6,7 +6,7 @@ using Abp.Events.Bus;
 using Abp.BackgroundJobs;
 using SuperRocket.Orchard.Job;
 
-namespace AbpEfConsoleApp
+namespace SuperRocket.Console
 {
     //Entry class of the test. It uses constructor-injection to get a repository and property-injection to get a Logger.
     public class Tester : ITransientDependency

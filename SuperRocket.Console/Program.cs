@@ -7,7 +7,7 @@ using EasyNetQ;
 using EasyNetQ.NonGeneric;
 using SuperRocket.Message;
 
-namespace AbpEfConsoleApp
+namespace SuperRocket.Console
 {
     public class Program
     {
@@ -51,20 +51,20 @@ namespace AbpEfConsoleApp
                         }
                     }));
 
-                    Console.WriteLine("Listening for messages. Hit <return> to quit.");
-                    Console.ReadLine();
+                    System.Console.WriteLine("Listening for messages. Hit <return> to quit.");
+                    System.Console.ReadLine();
                 }
 
-                Console.WriteLine("Press enter to exit...");
-                Console.ReadLine();
+                System.Console.WriteLine("Press enter to exit...");
+                System.Console.ReadLine();
             }
 
         }
 
         static void HandleTextMessage(TextMessage textMessage)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"Got message {textMessage.Text}");
+            System.Console.ForegroundColor = ConsoleColor.Red;
+            System.Console.WriteLine($"Got message {textMessage.Text}");
         }
     }
 }

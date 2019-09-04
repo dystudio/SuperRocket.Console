@@ -4,7 +4,7 @@ using Abp.Modules;
 using System;
 using System.Transactions;
 
-namespace AbpEfConsoleApp
+namespace SuperRocket.Console
 {
     //Defining a module depends on AbpEntityFrameworkModule
     [DependsOn(typeof(AbpEntityFrameworkModule))]

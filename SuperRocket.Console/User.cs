@@ -1,7 +1,7 @@
 using System;
 using Abp.Domain.Entities;
 
-namespace AbpEfConsoleApp
+namespace SuperRocket.Console
 {
     //A domain entity
     public class User : Entity<Guid>

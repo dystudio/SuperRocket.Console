@@ -4,7 +4,12 @@ using Abp.Domain.Repositories;
 using Castle.Core.Logging;
 using Abp.Events.Bus;
 using Abp.BackgroundJobs;
-using SuperRocket.Orchard.Job;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.Util;
+using System.Collections.Generic;
+using System.IO;
 
 namespace SuperRocket.Console
 {
@@ -30,8 +35,21 @@ namespace SuperRocket.Console
         {
             System.Console.ForegroundColor = ConsoleColor.Green;
             System.Console.WriteLine("Started ReportGenerator.Run() on {0} successfully!", DateTime.Now.ToString());
+            List<User> users = new List<User>();
+            User user = new User();
+            user.Id = Guid.NewGuid();
+            user.Name = "David";
 
-            System.Console.WriteLine($"Generate report from message: {message}");
+            users.Add(user);
+
+            user = new User();
+            user.Id = Guid.NewGuid();
+            user.Name = "Jack";
+            users.Add(user);
+
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Report", DateTime.Now.ToString("yyyyMMddhhmmss") + ".xlsx");
+
+            ExcelUtility.ExportToExcel(users, path, message, true);
 
             System.Console.WriteLine("Finished ReportGenerator.Run() on {0} successfully!", DateTime.Now.ToString());
         }

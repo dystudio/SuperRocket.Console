@@ -5,7 +5,7 @@ using Abp.Dependency;
 using Castle.Facilities.Logging;
 using EasyNetQ;
 using EasyNetQ.NonGeneric;
-using Messages;
+using SuperRocket.Message;
 
 namespace AbpEfConsoleApp
 {
@@ -13,6 +13,7 @@ namespace AbpEfConsoleApp
     {
         static void Main(string[] args)
         {
+            
             //Bootstrapping ABP system
             using (var bootstrapper = AbpBootstrapper.Create<MyConsoleAppModule>())
             {
@@ -21,6 +22,12 @@ namespace AbpEfConsoleApp
                     .AddFacility<LoggingFacility>(f => f.UseLog4Net().WithConfig("log4net.config"));
 
                 bootstrapper.Initialize();
+
+                //Getting a Tester object from DI and running it
+                using (var tester = bootstrapper.IocManager.ResolveAsDisposable<Tester>())
+                {
+                    tester.Object.Run();
+                } //Disposes tester and all it's dependencies
 
                 using (var bus = RabbitHutch.CreateBus("host=localhost"))
                 {
@@ -47,12 +54,6 @@ namespace AbpEfConsoleApp
                     Console.WriteLine("Listening for messages. Hit <return> to quit.");
                     Console.ReadLine();
                 }
-
-                //Getting a Tester object from DI and running it
-                using (var tester = bootstrapper.IocManager.ResolveAsDisposable<Tester>())
-                {
-                    tester.Object.Run();
-                } //Disposes tester and all it's dependencies
 
                 Console.WriteLine("Press enter to exit...");
                 Console.ReadLine();

@@ -3,3 +3,10 @@
 ################################################################################
 
 /.vs/SuperRocket.Console/v16
+/packages
+/SuperRocket.Console/bin/Debug
+/SuperRocket.Console/obj/Debug
+/SuperRocket.Message/bin/Debug/netstandard2.0
+/SuperRocket.Message/obj
+/SuperRocket.Publisher/bin/Debug/netcoreapp2.2
+/SuperRocket.Publisher/obj

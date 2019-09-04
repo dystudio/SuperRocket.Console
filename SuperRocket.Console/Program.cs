@@ -26,7 +26,7 @@ namespace SuperRocket.Console
                 //Getting a Tester object from DI and running it
                 using (var tester = bootstrapper.IocManager.ResolveAsDisposable<Tester>())
                 {
-                    tester.Object.Run();
+                    //tester.Object.Run();
                 } //Disposes tester and all it's dependencies
 
                 using (var bus = RabbitHutch.CreateBus("host=localhost"))
@@ -41,7 +41,11 @@ namespace SuperRocket.Console
                         if (task.IsCompleted && !task.IsFaulted)
                         {
                             // Everything worked out ok
-                            HandleTextMessage(message);
+                            using (var reportGenerator = bootstrapper.IocManager.ResolveAsDisposable<ReportGenerator>())
+                            {
+                                reportGenerator.Object.Run(message.Text);
+                            } //Disposes tester and all it's dependencies
+                            WriteTextMessageToConsole(message);
                         }
                         else
                         {
@@ -61,9 +65,9 @@ namespace SuperRocket.Console
 
         }
 
-        static void HandleTextMessage(TextMessage textMessage)
+        static void WriteTextMessageToConsole(TextMessage textMessage)
         {
-            System.Console.ForegroundColor = ConsoleColor.Red;
+            System.Console.ForegroundColor = ConsoleColor.Green;
             System.Console.WriteLine($"Got message {textMessage.Text}");
         }
     }
